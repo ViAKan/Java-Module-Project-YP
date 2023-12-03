@@ -1,18 +1,14 @@
 public class Formatter {
-Calculator calc = new Calculator();
-Goods goods = new Goods();
-Main main = new Main();
-double check = calc.sumPerPerson(goods.sum, main.persons);
 
-void form(double check){
-    if(Math.floor(check) > 20 && Math.floor(check)%10==1){
-        System.out.println(String.format("С каждого человека по : %.2f рубль.", check));
+    String form(double check) {
+        int rounded = (int) Math.floor(check);
+        int balance = (int) (Math.floor(check) % 10);
+        if (rounded == 1 || (rounded > 20 && balance == 1)) {
+            return "ль";
+        } else if ((rounded < 5 && rounded > 0) || (rounded > 20 && balance < 5 && balance > 0)) {
+            return "ля";
+        } else {
+            return "лей";
+        }
     }
-    else if (Math.floor(check) > 20 && Math.floor(check)%10 < 5 && Math.floor(check)%10 > 0){
-        System.out.println(String.format("С каждого человека по : %.2f рубля.", check));
-    }
-    else{
-        System.out.println(String.format("С каждого человека по : %.2f рублей.", check));
-    }
-}
 }

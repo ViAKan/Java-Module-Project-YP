@@ -1,50 +1,47 @@
 import java.util.Scanner;
 
 public class Goods {
-    Scanner scanner = new Scanner(System.in);
-    String name;
-    String Name = "";
-    double price;
+    private Scanner scanner = new Scanner(System.in);
+    private Formatter format = new Formatter();
+    private String name;
+    private double price;
+    StringBuilder builder = new StringBuilder();
     double sum = 0;
 
-    void AddGoods(Scanner scanner) {
+    void addGoods(Scanner scanner) {
+        scanner.useDelimiter("\\n");
         while (true) {
             System.out.println("Введите название товара : ");
             name = scanner.next();
-            Name = Name + "\n" + name;
+            builder.append("\n" + name);
             System.out.println("Введите стоимость товара (рубли,копейки) : ");
-            IsDouble();
-            while(price <= 0.){
-                System.out.println("Некорректная стоимость товара.");
-                System.out.println("Введите стоимость товара (рубли,копейки) : ");
-                IsDouble();
-            }
+            checkIfDouble();
             System.out.println("Товар успешно добавлен!");
             sum = sum + price;
             System.out.println("Продолжить? Введите любой символ, чтобы продолжить или 'Завершить' для завершения.");
-            System.out.println(String.format("Текущая сумма : %.2f руб" + ending(sum), sum));
+            System.out.printf("Текущая сумма : %.2f руб" + format.form(sum) + "\n", sum);
             String answer = scanner.next();
             if (answer.equalsIgnoreCase("Завершить")) {
                 break;
             }
         }
     }
-    void IsDouble () {
+
+    private void checkIfDouble() {
         while (!scanner.hasNextDouble()) {
-            System.out.println("Некорректная стоимость товара.");
-            System.out.println("Введите стоимость товара (рубли,копейки) : ");
+            printNotCorrect();
             scanner.next();
         }
         price = scanner.nextDouble();
+        while (price <= 0.) {
+            printNotCorrect();
+            checkIfDouble();
+        }
     }
-    String ending(double sum){
-        if(Math.floor(sum) > 20 && Math.floor(sum)%10==1){
-            return "ль";
-        }
-        else if (Math.floor(sum) > 20 && Math.floor(sum)%10 < 5 && Math.floor(sum)%10 > 0){
-            return "ля";
-        }
-        return "лей";
+
+    private void printNotCorrect() {
+        System.out.println("Некорректная стоимость товара.");
+        System.out.println("Введите стоимость товара (рубли,копейки) : ");
     }
 
 }
