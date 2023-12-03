@@ -1,13 +1,13 @@
 import java.util.Scanner;
 
 public class Main {
-    private static int persons;
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Goods goods = new Goods();
         Calculator calc = new Calculator();
         Formatter format = new Formatter();
+        int persons;
         while (true) {
             System.out.println("Введите количество человек : ");
             while (!scanner.hasNextInt()) {
@@ -26,6 +26,6 @@ public class Main {
         }
         goods.addGoods(scanner);
         System.out.println("Добавленные товары : " + "\n" + goods.builder + "\n");
-        System.out.printf("С каждого человека по : %.2f руб" + format.form(calc.sumPerPerson(goods.sum, persons)), calc.sumPerPerson(goods.sum, persons));
+        System.out.printf("С каждого человека : %.2f руб" + format.form(calc.sumPerPerson(goods.sum, persons)), calc.sumPerPerson(goods.sum, persons));
     }
 }

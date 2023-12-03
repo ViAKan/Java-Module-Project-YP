@@ -1,9 +1,8 @@
 import java.util.Scanner;
 
 public class Goods {
-    private Scanner scanner = new Scanner(System.in);
-    private Formatter format = new Formatter();
-    private String name;
+    private final Scanner scanner = new Scanner(System.in);
+    private final Formatter format = new Formatter();
     private double price;
     StringBuilder builder = new StringBuilder();
     double sum = 0;
@@ -12,8 +11,8 @@ public class Goods {
         scanner.useDelimiter("\\n");
         while (true) {
             System.out.println("Введите название товара : ");
-            name = scanner.next();
-            builder.append("\n" + name);
+            String name = scanner.next();
+            builder.append("\n").append(name);
             System.out.println("Введите стоимость товара (рубли,копейки) : ");
             checkIfDouble();
             System.out.println("Товар успешно добавлен!");
